@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="/js/app.js" defer></script>
+    <title>Home</title>
+</head>
+<body>
+    <div class="main-content">
+        {{>header}}
+
+        <form>
+            <label for="loc">Enter a city</label><br>
+            <input type="text" name="loc" id="loc">            
+            <button type="submit">Go</button>
+        </form>
+
+        <p class="msg-success"></p>
+        <p class="msg-error"></p>
+    </div>
+    
+    {{>footer}}
+</body>
+</html>
