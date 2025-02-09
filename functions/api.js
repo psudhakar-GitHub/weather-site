@@ -18,9 +18,9 @@ hbs.registerPartials(path.join(__dirname, "../templates/partials"));
 // Setup static page directory
 app.use(express.static(path.join(__dirname, "../public")));
 
-app.use("/.netlify/functions/api", router);
+app.use("/api/", router);
 
-router.get("", (req, res) => {
+router.get("/", (req, res) => {
   res.render("index", {
     title: "Weather App",
     name: "Sudhakar",

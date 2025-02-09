@@ -4,7 +4,6 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node src/app.js -e js,hbs",
     "build": "netlify deploy --prod"
   },
   "keywords": [],
@@ -13,6 +12,7 @@
   "type": "commonjs",
   "description": "",
   "dependencies": {
+    "@netlify/functions": "^3.0.0",
     "axios": "^1.7.9",
     "express": "^4.21.2",
     "hbs": "^4.2.0",
