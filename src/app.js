@@ -1,10 +1,11 @@
 const path = require("path");
 const hbs = require("hbs");
+const express = require("express");
+
 const geocode = require("./utils/geocode");
 const weather = require("./utils/weather");
 
-const express = require("express");
-
+const PORT = process.env.PORT || 3000;
 const app = express();
 
 // Config handlebar
@@ -81,6 +82,6 @@ app.get("*", (req, res) => {
   });
 });
 
-app.listen(3000, () => {
-  console.log("Listening on port 3000");
+app.listen(PORT, () => {
+  console.log("Listening on port " + PORT);
 });

@@ -7,7 +7,7 @@ msgError.textContent = '';
 msgSuccess.textContent = '';
 
 const getWeather = async (location) => {
-  const res = await fetch("http://localhost:3000/weather?loc=" + location);
+  const res = await fetch("/weather?loc=" + location);
   const data = await res.json();
 
   if (data.error) {
