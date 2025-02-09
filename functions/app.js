@@ -1,9 +1,11 @@
 const path = require("path");
 const hbs = require("hbs");
 const express = require("express");
+const router = express.Router();
+const serverless = require("serverless-http");
 
-const geocode = require("./utils/geocode");
-const weather = require("./utils/weather");
+const geocode = require("../src/utils/geocode");
+const weather = require("../src/utils/weather");
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -16,21 +18,23 @@ hbs.registerPartials(path.join(__dirname, "../templates/partials"));
 // Setup static page directory
 app.use(express.static(path.join(__dirname, "../public")));
 
-app.get("", (req, res) => {
+app.use("/.netlify/functions/api", router);
+
+router.get("", (req, res) => {
   res.render("index", {
     title: "Weather App",
     name: "Sudhakar",
   });
 });
 
-app.get("/about", (req, res) => {
+router.get("/about", (req, res) => {
   res.render("about", {
     title: "About Me",
     name: "Sudhakar P",
   });
 });
 
-app.get("/help", (req, res) => {
+router.get("/help", (req, res) => {
   res.render("help", {
     msg: "This is your help text!",
     title: "Help",
@@ -38,7 +42,7 @@ app.get("/help", (req, res) => {
   });
 });
 
-app.get("/weather", (req, res) => {
+router.get("/weather", (req, res) => {
   const location = req.query.loc;
   if (!location) {
     return res.send({
@@ -66,7 +70,7 @@ app.get("/weather", (req, res) => {
   });
 });
 
-app.get("/help/*", (req, res) => {
+router.get("/help/*", (req, res) => {
   res.render("404", {
     title: "404",
     msg: "No help article found!",
@@ -74,7 +78,7 @@ app.get("/help/*", (req, res) => {
   });
 });
 
-app.get("*", (req, res) => {
+router.get("*", (req, res) => {
   res.render("404", {
     title: "404",
     msg: "Page not found",
@@ -82,6 +86,10 @@ app.get("*", (req, res) => {
   });
 });
 
+module.exports.handler = serverless(app);
+
+/*
 app.listen(PORT, () => {
   console.log("Listening on port " + PORT);
 });
+*/
